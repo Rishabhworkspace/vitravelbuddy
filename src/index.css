@@ -23,7 +23,7 @@
   }
 }
 
-/* Animated Starfield Background */
+/* Enhanced Animated Starfield Background */
 .starfield {
   position: fixed;
   top: 0;
@@ -39,40 +39,63 @@
   width: 100%;
   height: 100%;
   background-image: 
-    radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+    radial-gradient(3px 3px at 20px 30px, #eee, transparent),
     radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
     radial-gradient(1px 1px at 90px 40px, #fff, transparent),
     radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
-    radial-gradient(2px 2px at 160px 30px, #ddd, transparent);
+    radial-gradient(2px 2px at 160px 30px, #ddd, transparent),
+    radial-gradient(1px 1px at 30px 120px, rgba(255,255,255,0.7), transparent),
+    radial-gradient(2px 2px at 200px 60px, #ccc, transparent);
   background-repeat: repeat;
-  background-size: 200px 100px;
-  animation: zoom 10s infinite linear;
+  background-size: 300px 200px;
+  animation: zoom 20s infinite linear;
 }
 
 @keyframes zoom {
   0% {
-    transform: scale(1);
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg);
   }
   100% {
-    transform: scale(1.5);
+    transform: scale(1) rotate(360deg);
   }
 }
 
-/* Lightsaber Glow Effects */
+/* Enhanced Lightsaber Glow Effects */
 .lightsaber-glow {
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
   border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.lightsaber-glow::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.lightsaber-glow:hover::before {
+  left: 100%;
 }
 
 .lightsaber-glow:hover {
   border-color: var(--sith-red);
   box-shadow: 
-    0 0 20px rgba(217, 4, 41, 0.5),
-    inset 0 0 20px rgba(217, 4, 41, 0.1);
-  transform: translateY(-2px);
+    0 0 30px rgba(217, 4, 41, 0.6),
+    inset 0 0 30px rgba(217, 4, 41, 0.1),
+    0 0 60px rgba(217, 4, 41, 0.3);
+  transform: translateY(-3px) scale(1.02);
 }
 
-/* Hyperspace Transition */
+/* Hyperspace Transition Enhanced */
 .hyperspace-enter {
   opacity: 0;
   transform: scale(0.8) rotateY(90deg);
@@ -81,44 +104,138 @@
 .hyperspace-enter-active {
   opacity: 1;
   transform: scale(1) rotateY(0deg);
-  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-/* Sith Text Glow */
+/* Enhanced Sith Text Glow */
 .sith-text {
   font-family: 'Orbitron', monospace;
-  text-shadow: 0 0 10px rgba(217, 4, 41, 0.8);
+  text-shadow: 
+    0 0 10px rgba(217, 4, 41, 0.8),
+    0 0 20px rgba(217, 4, 41, 0.6),
+    0 0 30px rgba(217, 4, 41, 0.4);
 }
 
 .sith-title {
   font-family: 'Audiowide', cursive;
-  background: linear-gradient(45deg, #D90429, #6C2DC7);
+  background: linear-gradient(45deg, #D90429, #6C2DC7, #007BFF, #D90429);
+  background-size: 300% 300%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  font-size: clamp(2rem, 8vw, 4rem);
+  font-size: clamp(2.5rem, 8vw, 5rem);
   font-weight: 900;
   text-shadow: 0 0 30px rgba(217, 4, 41, 0.5);
+  animation: gradientShift 4s ease-in-out infinite;
 }
 
-/* Animated Cards */
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Enhanced Animated Cards */
 .force-card {
   background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(108, 45, 199, 0.2) 100%);
   border: 1px solid rgba(217, 4, 41, 0.3);
   backdrop-filter: blur(10px);
-  transition: all 0.4s ease;
+  transition: all 0.5s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.force-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(217, 4, 41, 0.1), transparent);
+  transform: rotate(45deg);
+  transition: all 0.6s ease;
+  opacity: 0;
+}
+
+.force-card:hover::before {
+  opacity: 1;
+  animation: shimmer 1s ease-in-out;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
 }
 
 .force-card:hover {
-  background: linear-gradient(135deg, rgba(217, 4, 41, 0.1) 0%, rgba(108, 45, 199, 0.3) 100%);
+  background: linear-gradient(135deg, rgba(217, 4, 41, 0.15) 0%, rgba(108, 45, 199, 0.4) 100%);
   border-color: rgba(217, 4, 41, 0.8);
-  transform: translateY(-10px) scale(1.02);
+  transform: translateY(-15px) scale(1.03);
   box-shadow: 
-    0 20px 40px rgba(217, 4, 41, 0.3),
-    0 0 30px rgba(108, 45, 199, 0.2);
+    0 25px 50px rgba(217, 4, 41, 0.4),
+    0 0 40px rgba(108, 45, 199, 0.3),
+    inset 0 0 20px rgba(255, 255, 255, 0.1);
 }
 
-/* Mobile Responsive */
+/* New Animation Classes */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease-out;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(217, 4, 41, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(217, 4, 41, 0.8);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Interactive hover effects for navigation */
+.nav-item {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.nav-item::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #D90429, #6C2DC7);
+  transition: width 0.3s ease;
+}
+
+.nav-item:hover::after {
+  width: 100%;
+}
+
+/* Mobile Responsive Enhancements */
 @media (max-width: 768px) {
   .sith-title {
     font-size: 2.5rem;
@@ -127,22 +244,39 @@
   .force-card {
     margin: 1rem 0;
   }
+
+  .force-card:hover {
+    transform: translateY(-8px) scale(1.02);
+  }
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar Enhanced */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(45deg, #D90429, #6C2DC7);
-  border-radius: 4px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(217, 4, 41, 0.5);
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(45deg, #FF073A, #8A4FFF);
+  box-shadow: 0 0 15px rgba(217, 4, 41, 0.8);
+}
+
+/* Loading animation */
+@keyframes hyperspaceJump {
+  0% { transform: translateX(-100vw) rotate(0deg); }
+  100% { transform: translateX(100vw) rotate(360deg); }
+}
+
+.hyperspace-loading {
+  animation: hyperspaceJump 2s ease-in-out infinite;
 }

@@ -13,6 +13,7 @@ import OutingBuddy from "./pages/OutingBuddy";
 import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import Starfield from "./components/Starfield";
+import Navigation from "./components/Navigation";
 
 const queryClient = new QueryClient();
 
@@ -24,15 +25,18 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/cabbuddy" element={<CabBuddy />} />
-            <Route path="/tripbuddy" element={<TripBuddy />} />
-            <Route path="/outingbuddy" element={<OutingBuddy />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <Navigation />
+          <div className="pt-16">
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/auth" element={<Auth />} />
+              <Route path="/cabbuddy" element={<CabBuddy />} />
+              <Route path="/tripbuddy" element={<TripBuddy />} />
+              <Route path="/outingbuddy" element={<OutingBuddy />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
         </BrowserRouter>
       </AuthProvider>
     </TooltipProvider>
