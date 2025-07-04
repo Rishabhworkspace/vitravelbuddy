@@ -63,12 +63,86 @@
   }
 }
 
+/* 3D Floating Planets */
+.floating-planet {
+  position: absolute;
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+  z-index: 1;
+}
+
+.floating-planet:nth-child(1) {
+  width: 60px;
+  height: 60px;
+  top: 20%;
+  left: 10%;
+  background: radial-gradient(circle at 30% 30%, #ff6b6b, #d63031);
+  animation-delay: 0s;
+}
+
+.floating-planet:nth-child(2) {
+  width: 40px;
+  height: 40px;
+  top: 60%;
+  right: 15%;
+  background: radial-gradient(circle at 30% 30%, #74b9ff, #0984e3);
+  animation-delay: -2s;
+}
+
+.floating-planet:nth-child(3) {
+  width: 80px;
+  height: 80px;
+  bottom: 10%;
+  left: 20%;
+  background: radial-gradient(circle at 30% 30%, #a29bfe, #6c5ce7);
+  animation-delay: -4s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotateY(0deg);
+  }
+  50% {
+    transform: translateY(-30px) rotateY(180deg);
+  }
+}
+
+/* Parallax Layers */
+.parallax-container {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  perspective: 1000px;
+}
+
+.parallax-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.parallax-back {
+  transform: translateZ(-300px) scale(1.3);
+}
+
+.parallax-mid {
+  transform: translateZ(-150px) scale(1.15);
+}
+
+.parallax-front {
+  transform: translateZ(0);
+}
+
 /* Enhanced Lightsaber Glow Effects */
 .lightsaber-glow {
   transition: all 0.4s ease;
   border: 2px solid transparent;
   position: relative;
   overflow: hidden;
+  /* Ensure inputs remain functional */
+  transform: translateZ(0);
 }
 
 .lightsaber-glow::before {
@@ -80,6 +154,7 @@
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
   transition: left 0.5s;
+  pointer-events: none;
 }
 
 .lightsaber-glow:hover::before {
@@ -92,18 +167,82 @@
     0 0 30px rgba(217, 4, 41, 0.6),
     inset 0 0 30px rgba(217, 4, 41, 0.1),
     0 0 60px rgba(217, 4, 41, 0.3);
-  transform: translateY(-3px) scale(1.02);
+  transform: translateY(-3px) scale(1.02) translateZ(0);
+}
+
+/* Form Elements - Ensure they remain functional */
+input, textarea, select, button {
+  transform: translateZ(0) !important;
+  backface-visibility: hidden !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+/* Fix for form containers */
+form {
+  transform: translateZ(0);
+  position: relative;
+  z-index: 5;
+}
+
+/* Card containers should maintain 3D but not interfere with inputs */
+.force-card {
+  background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(108, 45, 199, 0.2) 100%);
+  border: 1px solid rgba(217, 4, 41, 0.3);
+  backdrop-filter: blur(10px);
+  transition: all 0.5s ease;
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0);
+}
+
+.force-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(217, 4, 41, 0.1), transparent);
+  transform: rotate(45deg);
+  transition: all 0.6s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.force-card:hover::before {
+  opacity: 1;
+  animation: shimmer 1s ease-in-out;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+.force-card:hover {
+  background: linear-gradient(135deg, rgba(217, 4, 41, 0.15) 0%, rgba(108, 45, 199, 0.4) 100%);
+  border-color: rgba(217, 4, 41, 0.8);
+  transform: translateY(-15px) scale(1.03) translateZ(0);
+  box-shadow: 
+    0 25px 50px rgba(217, 4, 41, 0.4),
+    0 0 40px rgba(108, 45, 199, 0.3),
+    inset 0 0 20px rgba(255, 255, 255, 0.1);
 }
 
 /* Hyperspace Transition Enhanced */
 .hyperspace-enter {
   opacity: 0;
-  transform: scale(0.8) rotateY(90deg);
+  transform: scale(0.8) rotateY(90deg) translateZ(0);
 }
 
 .hyperspace-enter-active {
   opacity: 1;
-  transform: scale(1) rotateY(0deg);
+  transform: scale(1) rotateY(0deg) translateZ(0);
   transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -114,6 +253,7 @@
     0 0 10px rgba(217, 4, 41, 0.8),
     0 0 20px rgba(217, 4, 41, 0.6),
     0 0 30px rgba(217, 4, 41, 0.4);
+  transform: translateZ(0);
 }
 
 .sith-title {
@@ -138,62 +278,74 @@
   }
 }
 
-/* Enhanced Animated Cards */
-.force-card {
-  background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(108, 45, 199, 0.2) 100%);
-  border: 1px solid rgba(217, 4, 41, 0.3);
-  backdrop-filter: blur(10px);
-  transition: all 0.5s ease;
+/* 3D Hologram Effect for Cards */
+.hologram-card {
   position: relative;
-  overflow: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
 }
 
-.force-card::before {
+.hologram-card:hover {
+  transform: rotateY(5deg) rotateX(5deg) translateZ(20px);
+}
+
+.hologram-card::after {
   content: '';
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(45deg, transparent, rgba(217, 4, 41, 0.1), transparent);
-  transform: rotate(45deg);
-  transition: all 0.6s ease;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, 
+    rgba(0,255,255,0.1) 0%, 
+    transparent 50%, 
+    rgba(255,0,255,0.1) 100%);
+  pointer-events: none;
   opacity: 0;
+  transition: opacity 0.3s;
 }
 
-.force-card:hover::before {
+.hologram-card:hover::after {
   opacity: 1;
-  animation: shimmer 1s ease-in-out;
 }
 
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%) translateY(-100%) rotate(45deg);
-  }
-  100% {
-    transform: translateX(100%) translateY(100%) rotate(45deg);
-  }
+/* Interactive 3D Buttons */
+.btn-3d {
+  transform-style: preserve-3d;
+  transition: transform 0.2s;
+  position: relative;
 }
 
-.force-card:hover {
-  background: linear-gradient(135deg, rgba(217, 4, 41, 0.15) 0%, rgba(108, 45, 199, 0.4) 100%);
-  border-color: rgba(217, 4, 41, 0.8);
-  transform: translateY(-15px) scale(1.03);
-  box-shadow: 
-    0 25px 50px rgba(217, 4, 41, 0.4),
-    0 0 40px rgba(108, 45, 199, 0.3),
-    inset 0 0 20px rgba(255, 255, 255, 0.1);
+.btn-3d:hover {
+  transform: translateZ(10px) rotateX(-5deg);
+}
+
+.btn-3d:active {
+  transform: translateZ(5px) rotateX(-2deg);
+}
+
+/* Depth layers for content */
+.depth-layer-1 {
+  transform: translateZ(10px);
+}
+
+.depth-layer-2 {
+  transform: translateZ(20px);
+}
+
+.depth-layer-3 {
+  transform: translateZ(30px);
 }
 
 /* New Animation Classes */
 @keyframes fade-in {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(30px) translateZ(0);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) translateZ(0);
   }
 }
 
@@ -218,6 +370,7 @@
 .nav-item {
   position: relative;
   transition: all 0.3s ease;
+  transform: translateZ(0);
 }
 
 .nav-item::after {
@@ -246,7 +399,16 @@
   }
 
   .force-card:hover {
-    transform: translateY(-8px) scale(1.02);
+    transform: translateY(-8px) scale(1.02) translateZ(0);
+  }
+  
+  /* Reduce 3D effects on mobile for better performance */
+  .hologram-card:hover {
+    transform: scale(1.02);
+  }
+  
+  .btn-3d:hover {
+    transform: scale(1.05);
   }
 }
 
@@ -273,10 +435,23 @@
 
 /* Loading animation */
 @keyframes hyperspaceJump {
-  0% { transform: translateX(-100vw) rotate(0deg); }
-  100% { transform: translateX(100vw) rotate(360deg); }
+  0% { transform: translateX(-100vw) rotate(0deg) translateZ(0); }
+  100% { transform: translateX(100vw) rotate(360deg) translateZ(0); }
 }
 
 .hyperspace-loading {
   animation: hyperspaceJump 2s ease-in-out infinite;
+}
+
+/* Ensure select dropdowns work properly */
+[role="listbox"], [role="option"] {
+  transform: translateZ(0) !important;
+  position: relative !important;
+  z-index: 50 !important;
+}
+
+/* Fix for Radix UI components */
+[data-radix-popper-content-wrapper] {
+  z-index: 50 !important;
+  transform: translateZ(0) !important;
 }
