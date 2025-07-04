@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Audiowide&family=Exo:wght@300;400;600;700&display=swap');
 @tailwind base;
 @tailwind components;
@@ -63,56 +62,116 @@
   }
 }
 
-/* 3D Floating Planets */
+/* Enhanced 3D Floating Planets */
+.floating-planets-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1;
+  transform-style: preserve-3d;
+}
+
 .floating-planet {
   position: absolute;
   border-radius: 50%;
-  animation: float 6s ease-in-out infinite;
+  animation: float 8s ease-in-out infinite;
   z-index: 1;
+  transition: transform 0.1s ease-out;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
 }
 
-.floating-planet:nth-child(1) {
-  width: 60px;
-  height: 60px;
-  top: 20%;
-  left: 10%;
-  background: radial-gradient(circle at 30% 30%, #ff6b6b, #d63031);
-  animation-delay: 0s;
-}
-
-.floating-planet:nth-child(2) {
-  width: 40px;
-  height: 40px;
-  top: 60%;
-  right: 15%;
-  background: radial-gradient(circle at 30% 30%, #74b9ff, #0984e3);
-  animation-delay: -2s;
-}
-
-.floating-planet:nth-child(3) {
+.planet-1 {
   width: 80px;
   height: 80px;
-  bottom: 10%;
-  left: 20%;
-  background: radial-gradient(circle at 30% 30%, #a29bfe, #6c5ce7);
-  animation-delay: -4s;
+  top: 15%;
+  left: 8%;
+  background: radial-gradient(circle at 25% 25%, #ff6b6b, #d63031, #2d3436);
+  animation-delay: 0s;
+  box-shadow: 0 0 30px rgba(255, 107, 107, 0.4), inset -10px -10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.planet-2 {
+  width: 60px;
+  height: 60px;
+  top: 70%;
+  right: 12%;
+  background: radial-gradient(circle at 30% 20%, #74b9ff, #0984e3, #2d3436);
+  animation-delay: -3s;
+  box-shadow: 0 0 25px rgba(116, 185, 255, 0.4), inset -8px -8px 15px rgba(0, 0, 0, 0.3);
+}
+
+.planet-3 {
+  width: 100px;
+  height: 100px;
+  bottom: 20%;
+  left: 15%;
+  background: radial-gradient(circle at 35% 25%, #a29bfe, #6c5ce7, #2d3436);
+  animation-delay: -6s;
+  box-shadow: 0 0 35px rgba(162, 155, 254, 0.4), inset -12px -12px 25px rgba(0, 0, 0, 0.3);
 }
 
 @keyframes float {
   0%, 100% {
-    transform: translateY(0px) rotateY(0deg);
+    transform: translateY(0px) rotateY(0deg) rotateX(0deg);
+  }
+  25% {
+    transform: translateY(-15px) rotateY(90deg) rotateX(5deg);
   }
   50% {
-    transform: translateY(-30px) rotateY(180deg);
+    transform: translateY(-30px) rotateY(180deg) rotateX(0deg);
+  }
+  75% {
+    transform: translateY(-15px) rotateY(270deg) rotateX(-5deg);
   }
 }
 
-/* Parallax Layers */
+/* Asteroid Belt Animation */
+.asteroid-belt {
+  position: absolute;
+  top: 40%;
+  right: 5%;
+  width: 200px;
+  height: 200px;
+  transform-style: preserve-3d;
+}
+
+.asteroid {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, #ddd, #999);
+  border-radius: 50%;
+  animation: orbit 15s linear infinite;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+}
+
+.asteroid:nth-child(1) { animation-delay: 0s; top: 10%; left: 50%; }
+.asteroid:nth-child(2) { animation-delay: -2s; top: 30%; left: 70%; }
+.asteroid:nth-child(3) { animation-delay: -4s; top: 50%; left: 80%; }
+.asteroid:nth-child(4) { animation-delay: -6s; top: 70%; left: 70%; }
+.asteroid:nth-child(5) { animation-delay: -8s; top: 80%; left: 50%; }
+.asteroid:nth-child(6) { animation-delay: -10s; top: 70%; left: 30%; }
+.asteroid:nth-child(7) { animation-delay: -12s; top: 50%; left: 20%; }
+.asteroid:nth-child(8) { animation-delay: -14s; top: 30%; left: 30%; }
+
+@keyframes orbit {
+  0% {
+    transform: rotate(0deg) translateX(80px) rotate(0deg) translateZ(10px);
+  }
+  100% {
+    transform: rotate(360deg) translateX(80px) rotate(-360deg) translateZ(10px);
+  }
+}
+
+/* Enhanced Parallax Layers */
 .parallax-container {
   position: relative;
-  height: 100vh;
-  overflow: hidden;
-  perspective: 1000px;
+  min-height: 100vh;
+  transform-style: preserve-3d;
+  transition: transform 0.1s ease-out;
 }
 
 .parallax-layer {
@@ -121,79 +180,32 @@
   left: 0;
   right: 0;
   bottom: 0;
-}
-
-.parallax-back {
-  transform: translateZ(-300px) scale(1.3);
-}
-
-.parallax-mid {
-  transform: translateZ(-150px) scale(1.15);
-}
-
-.parallax-front {
-  transform: translateZ(0);
-}
-
-/* Enhanced Lightsaber Glow Effects */
-.lightsaber-glow {
-  transition: all 0.4s ease;
-  border: 2px solid transparent;
-  position: relative;
-  overflow: hidden;
-  /* Ensure inputs remain functional */
-  transform: translateZ(0);
-}
-
-.lightsaber-glow::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  transition: left 0.5s;
   pointer-events: none;
 }
 
-.lightsaber-glow:hover::before {
-  left: 100%;
+.parallax-back {
+  background: radial-gradient(circle at 20% 80%, rgba(217, 4, 41, 0.05) 0%, transparent 50%),
+             radial-gradient(circle at 80% 20%, rgba(108, 45, 199, 0.05) 0%, transparent 50%);
 }
 
-.lightsaber-glow:hover {
-  border-color: var(--sith-red);
-  box-shadow: 
-    0 0 30px rgba(217, 4, 41, 0.6),
-    inset 0 0 30px rgba(217, 4, 41, 0.1),
-    0 0 60px rgba(217, 4, 41, 0.3);
-  transform: translateY(-3px) scale(1.02) translateZ(0);
+.parallax-mid {
+  background: radial-gradient(circle at 60% 40%, rgba(0, 123, 255, 0.03) 0%, transparent 50%);
 }
 
-/* Form Elements - Ensure they remain functional */
-input, textarea, select, button {
-  transform: translateZ(0) !important;
-  backface-visibility: hidden !important;
-  position: relative !important;
-  z-index: 10 !important;
+.parallax-front {
+  pointer-events: auto;
 }
 
-/* Fix for form containers */
-form {
-  transform: translateZ(0);
-  position: relative;
-  z-index: 5;
-}
-
-/* Card containers should maintain 3D but not interfere with inputs */
+/* Enhanced Card 3D Effects */
 .force-card {
   background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(108, 45, 199, 0.2) 100%);
   border: 1px solid rgba(217, 4, 41, 0.3);
   backdrop-filter: blur(10px);
-  transition: all 0.5s ease;
+  transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
   overflow: hidden;
   transform: translateZ(0);
+  transform-style: preserve-3d;
 }
 
 .force-card::before {
@@ -227,150 +239,38 @@ form {
 .force-card:hover {
   background: linear-gradient(135deg, rgba(217, 4, 41, 0.15) 0%, rgba(108, 45, 199, 0.4) 100%);
   border-color: rgba(217, 4, 41, 0.8);
-  transform: translateY(-15px) scale(1.03) translateZ(0);
+  transform: translateY(-20px) scale(1.05) rotateX(5deg) rotateY(2deg) translateZ(20px);
   box-shadow: 
-    0 25px 50px rgba(217, 4, 41, 0.4),
-    0 0 40px rgba(108, 45, 199, 0.3),
-    inset 0 0 20px rgba(255, 255, 255, 0.1);
+    0 30px 60px rgba(217, 4, 41, 0.4),
+    0 0 50px rgba(108, 45, 199, 0.3),
+    inset 0 0 30px rgba(255, 255, 255, 0.1);
 }
 
-/* Hyperspace Transition Enhanced */
-.hyperspace-enter {
-  opacity: 0;
-  transform: scale(0.8) rotateY(90deg) translateZ(0);
-}
-
-.hyperspace-enter-active {
-  opacity: 1;
-  transform: scale(1) rotateY(0deg) translateZ(0);
-  transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-/* Enhanced Sith Text Glow */
-.sith-text {
-  font-family: 'Orbitron', monospace;
-  text-shadow: 
-    0 0 10px rgba(217, 4, 41, 0.8),
-    0 0 20px rgba(217, 4, 41, 0.6),
-    0 0 30px rgba(217, 4, 41, 0.4);
-  transform: translateZ(0);
-}
-
-.sith-title {
-  font-family: 'Audiowide', cursive;
-  background: linear-gradient(45deg, #D90429, #6C2DC7, #007BFF, #D90429);
-  background-size: 300% 300%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-size: clamp(2.5rem, 8vw, 5rem);
-  font-weight: 900;
-  text-shadow: 0 0 30px rgba(217, 4, 41, 0.5);
-  animation: gradientShift 4s ease-in-out infinite;
-}
-
-@keyframes gradientShift {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-/* 3D Hologram Effect for Cards */
-.hologram-card {
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.6s;
-}
-
-.hologram-card:hover {
-  transform: rotateY(5deg) rotateX(5deg) translateZ(20px);
-}
-
-.hologram-card::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(45deg, 
-    rgba(0,255,255,0.1) 0%, 
-    transparent 50%, 
-    rgba(255,0,255,0.1) 100%);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.hologram-card:hover::after {
-  opacity: 1;
-}
-
-/* Interactive 3D Buttons */
+/* Enhanced Interactive 3D Buttons */
 .btn-3d {
   transform-style: preserve-3d;
-  transition: transform 0.2s;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   position: relative;
 }
 
 .btn-3d:hover {
-  transform: translateZ(10px) rotateX(-5deg);
+  transform: translateZ(15px) rotateX(-8deg) rotateY(3deg) scale(1.05);
+  box-shadow: 
+    0 20px 40px rgba(217, 4, 41, 0.3),
+    0 0 30px rgba(217, 4, 41, 0.2);
 }
 
 .btn-3d:active {
-  transform: translateZ(5px) rotateX(-2deg);
+  transform: translateZ(8px) rotateX(-4deg) rotateY(1deg) scale(1.02);
+  transition: all 0.1s ease;
 }
 
-/* Depth layers for content */
-.depth-layer-1 {
-  transform: translateZ(10px);
-}
-
-.depth-layer-2 {
-  transform: translateZ(20px);
-}
-
-.depth-layer-3 {
-  transform: translateZ(30px);
-}
-
-/* New Animation Classes */
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(30px) translateZ(0);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) translateZ(0);
-  }
-}
-
-.animate-fade-in {
-  animation: fade-in 1s ease-out;
-}
-
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(217, 4, 41, 0.5);
-  }
-  50% {
-    box-shadow: 0 0 40px rgba(217, 4, 41, 0.8);
-  }
-}
-
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
-}
-
-/* Interactive hover effects for navigation */
+/* Enhanced Navigation 3D Effects */
 .nav-item {
   position: relative;
   transition: all 0.3s ease;
   transform: translateZ(0);
+  transform-style: preserve-3d;
 }
 
 .nav-item::after {
@@ -384,319 +284,28 @@ form {
   transition: width 0.3s ease;
 }
 
+.nav-item:hover {
+  transform: translateY(-2px) translateZ(5px);
+}
+
 .nav-item:hover::after {
   width: 100%;
 }
 
-/* Mobile Responsive Enhancements */
-@media (max-width: 768px) {
-  .sith-title {
-    font-size: 2.5rem;
-  }
-  
-  .force-card {
-    margin: 1rem 0;
-  }
-
-  .force-card:hover {
-    transform: translateY(-8px) scale(1.02) translateZ(0);
-  }
-  
-  /* Reduce 3D effects on mobile for better performance */
-  .hologram-card:hover {
-    transform: scale(1.02);
-  }
-  
-  .btn-3d:hover {
-    transform: scale(1.05);
-  }
+/* Floating Animation for Various Elements */
+.floating-element {
+  animation: gentleFloat 6s ease-in-out infinite;
 }
 
-/* Custom Scrollbar Enhanced */
-::-webkit-scrollbar {
-  width: 10px;
+.floating-element:nth-child(odd) {
+  animation-delay: -3s;
 }
 
-::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(45deg, #D90429, #6C2DC7);
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(217, 4, 41, 0.5);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(45deg, #FF073A, #8A4FFF);
-  box-shadow: 0 0 15px rgba(217, 4, 41, 0.8);
-}
-
-/* Loading animation */
-@keyframes hyperspaceJump {
-  0% { transform: translateX(-100vw) rotate(0deg) translateZ(0); }
-  100% { transform: translateX(100vw) rotate(360deg) translateZ(0); }
-}
-
-.hyperspace-loading {
-  animation: hyperspaceJump 2s ease-in-out infinite;
-}
-
-/* ENHANCED DROPDOWN AND SELECT FIXES */
-/* Ensure select dropdowns work properly with proper z-index and positioning */
-[role="listbox"], [role="option"] {
-  transform: translateZ(0) !important;
-  position: relative !important;
-  z-index: 9999 !important;
-}
-
-/* Fix for Radix UI components - Ensure proper positioning and visibility */
-[data-radix-popper-content-wrapper] {
-  z-index: 9999 !important;
-  transform: translateZ(0) !important;
-}
-
-/* Radix Select Content positioning fixes */
-[data-radix-select-content] {
-  z-index: 9999 !important;
-  position: relative !important;
-  transform: translateZ(0) !important;
-  background: linear-gradient(135deg, rgba(31, 41, 55, 0.98) 0%, rgba(55, 65, 81, 0.98) 100%) !important;
-  backdrop-filter: blur(12px) !important;
-  border: 2px solid rgba(217, 4, 41, 0.5) !important;
-  box-shadow: 0 0 30px rgba(217, 4, 41, 0.3), 0 20px 40px rgba(0, 0, 0, 0.8) !important;
-}
-
-/* Radix Dropdown Content positioning fixes */
-[data-radix-dropdown-menu-content] {
-  z-index: 9999 !important;
-  position: relative !important;
-  transform: translateZ(0) !important;
-  background: linear-gradient(135deg, rgba(31, 41, 55, 0.98) 0%, rgba(55, 65, 81, 0.98) 100%) !important;
-  backdrop-filter: blur(12px) !important;
-  border: 2px solid rgba(217, 4, 41, 0.5) !important;
-  box-shadow: 0 0 30px rgba(217, 4, 41, 0.3), 0 20px 40px rgba(0, 0, 0, 0.8) !important;
-}
-
-/* Enhanced Toast Visibility */
-.toast {
-  background: linear-gradient(135deg, rgba(217, 4, 41, 0.95) 0%, rgba(108, 45, 199, 0.95) 100%) !important;
-  backdrop-filter: blur(15px) !important;
-  border: 2px solid rgba(217, 4, 41, 0.8) !important;
-  color: #FFFFFF !important;
-  font-family: 'Orbitron', monospace !important;
-  font-weight: 600 !important;
-  font-size: 1.1rem !important;
-  text-shadow: 0 0 10px rgba(217, 4, 41, 0.8) !important;
-  box-shadow: 
-    0 0 30px rgba(217, 4, 41, 0.6),
-    0 20px 40px rgba(0, 0, 0, 0.8),
-    inset 0 0 20px rgba(255, 255, 255, 0.1) !important;
-  z-index: 9999 !important;
-  transform: translateZ(50px) !important;
-}
-
-.toast::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(45deg, #D90429, #6C2DC7, #007BFF, #D90429);
-  background-size: 300% 300%;
-  border-radius: inherit;
-  z-index: -1;
-  animation: gradientShift 3s ease-in-out infinite;
-  pointer-events: none;
-}
-
-/* Sonner toast overrides */
-[data-sonner-toast] {
-  background: linear-gradient(135deg, rgba(217, 4, 41, 0.95) 0%, rgba(108, 45, 199, 0.95) 100%) !important;
-  backdrop-filter: blur(15px) !important;
-  border: 2px solid rgba(217, 4, 41, 0.8) !important;
-  color: #FFFFFF !important;
-  font-family: 'Orbitron', monospace !important;
-  font-weight: 600 !important;
-  text-shadow: 0 0 10px rgba(217, 4, 41, 0.8) !important;
-  box-shadow: 
-    0 0 30px rgba(217, 4, 41, 0.6),
-    0 20px 40px rgba(0, 0, 0, 0.8),
-    inset 0 0 20px rgba(255, 255, 255, 0.1) !important;
-}
-
-[data-sonner-toast][data-type="success"] {
-  background: linear-gradient(135deg, rgba(34, 197, 94, 0.95) 0%, rgba(16, 185, 129, 0.95) 100%) !important;
-  border-color: rgba(34, 197, 94, 0.8) !important;
-  text-shadow: 0 0 10px rgba(34, 197, 94, 0.8) !important;
-  box-shadow: 
-    0 0 30px rgba(34, 197, 94, 0.6),
-    0 20px 40px rgba(0, 0, 0, 0.8),
-    inset 0 0 20px rgba(255, 255, 255, 0.1) !important;
-}
-
-[data-sonner-toast][data-type="error"] {
-  background: linear-gradient(135deg, rgba(239, 68, 68, 0.95) 0%, rgba(220, 38, 38, 0.95) 100%) !important;
-  border-color: rgba(239, 68, 68, 0.8) !important;
-  text-shadow: 0 0 10px rgba(239, 68, 68, 0.8) !important;
-  box-shadow: 
-    0 0 30px rgba(239, 68, 68, 0.6),
-    0 20px 40px rgba(0, 0, 0, 0.8),
-    inset 0 0 20px rgba(255, 255, 255, 0.1) !important;
-}
-
-/* 3D Spaceship Styles */
-.spaceship-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 1;
-  transform-style: preserve-3d;
-  perspective: 1000px;
-}
-
-.spaceship {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 120px;
-  height: 60px;
-  transform-style: preserve-3d;
-  transition: transform 0.3s ease-out;
-  transform-origin: center center;
-}
-
-.spaceship-body {
-  position: absolute;
-  width: 120px;
-  height: 60px;
-  background: linear-gradient(45deg, #4A5568, #718096);
-  border-radius: 60px 20px 20px 60px;
-  box-shadow: 
-    0 0 20px rgba(66, 153, 225, 0.5),
-    inset 0 0 20px rgba(255, 255, 255, 0.1);
-  transform: translateZ(0);
-}
-
-.spaceship-wing {
-  position: absolute;
-  width: 40px;
-  height: 20px;
-  background: linear-gradient(45deg, #2D3748, #4A5568);
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(66, 153, 225, 0.3);
-}
-
-.spaceship-wing.top {
-  top: -10px;
-  left: 20px;
-  transform: rotateZ(-15deg) translateZ(-5px);
-}
-
-.spaceship-wing.bottom {
-  bottom: -10px;
-  left: 20px;
-  transform: rotateZ(15deg) translateZ(-5px);
-}
-
-.spaceship-engine {
-  position: absolute;
-  right: -10px;
-  top: 50%;
-  transform: translateY(-50%) translateZ(-10px);
-  width: 20px;
-  height: 30px;
-  background: radial-gradient(circle, #FF6B6B, #FF073A);
-  border-radius: 50%;
-  box-shadow: 
-    0 0 20px #FF073A,
-    0 0 40px rgba(255, 7, 58, 0.5);
-  animation: enginePulse 1s ease-in-out infinite alternate;
-}
-
-.spaceship-cockpit {
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%) translateZ(5px);
-  width: 30px;
-  height: 20px;
-  background: radial-gradient(circle, rgba(135, 206, 250, 0.8), rgba(66, 153, 225, 0.4));
-  border-radius: 50%;
-  border: 2px solid rgba(66, 153, 225, 0.6);
-  box-shadow: 
-    0 0 15px rgba(135, 206, 250, 0.8),
-    inset 0 0 10px rgba(255, 255, 255, 0.3);
-}
-
-@keyframes enginePulse {
-  0% {
-    box-shadow: 
-      0 0 20px #FF073A,
-      0 0 40px rgba(255, 7, 58, 0.5);
-    transform: translateY(-50%) translateZ(-10px) scale(1);
-  }
-  100% {
-    box-shadow: 
-      0 0 30px #FF073A,
-      0 0 60px rgba(255, 7, 58, 0.8);
-    transform: translateY(-50%) translateZ(-10px) scale(1.1);
-  }
-}
-
-/* Spaceship Trail Effect */
-.spaceship-trail {
-  position: absolute;
-  right: -50px;
-  top: 50%;
-  transform: translateY(-50%) translateZ(-15px);
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(90deg, transparent, rgba(255, 7, 58, 0.6), transparent);
-  border-radius: 2px;
-  opacity: 0.7;
-  animation: trailFlow 2s ease-in-out infinite;
-}
-
-@keyframes trailFlow {
+@keyframes gentleFloat {
   0%, 100% {
-    opacity: 0.3;
-    transform: translateY(-50%) translateZ(-15px) scaleX(1);
+    transform: translateY(0px) rotateZ(0deg);
   }
   50% {
-    opacity: 0.8;
-    transform: translateY(-50%) translateZ(-15px) scaleX(1.2);
-  }
-}
-
-@media (max-width: 768px) {
-  .spaceship {
-    width: 80px;
-    height: 40px;
-  }
-  
-  .spaceship-body {
-    width: 80px;
-    height: 40px;
-  }
-  
-  .spaceship-wing {
-    width: 25px;
-    height: 15px;
-  }
-  
-  .spaceship-engine {
-    width: 15px;
-    height: 20px;
-  }
-  
-  .spaceship-cockpit {
-    width: 20px;
-    height: 15px;
+    transform: translateY(-10px) rotateZ(1deg);
   }
 }

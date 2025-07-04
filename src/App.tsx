@@ -14,6 +14,8 @@ import NotFound from "./pages/NotFound";
 import Starfield from "./components/Starfield";
 import Navigation from "./components/Navigation";
 import Spaceship3D from "./components/Spaceship3D";
+import FloatingPlanets from "./components/FloatingPlanets";
+import ParallaxContainer from "./components/ParallaxContainer";
 
 const queryClient = new QueryClient();
 
@@ -22,22 +24,25 @@ const App = () => (
     <TooltipProvider>
       <AuthProvider>
         <Starfield />
+        <FloatingPlanets />
         <Spaceship3D />
         <Toaster />
         <Sonner />
         <BrowserRouter>
           <Navigation />
-          <div className="pt-16">
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/auth" element={<Auth />} />
-              <Route path="/cabbuddy" element={<CabBuddy />} />
-              <Route path="/tripbuddy" element={<TripBuddy />} />
-              <Route path="/outingbuddy" element={<OutingBuddy />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </div>
+          <ParallaxContainer>
+            <div className="pt-16">
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/auth" element={<Auth />} />
+                <Route path="/cabbuddy" element={<CabBuddy />} />
+                <Route path="/tripbuddy" element={<TripBuddy />} />
+                <Route path="/outingbuddy" element={<OutingBuddy />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </div>
+          </ParallaxContainer>
         </BrowserRouter>
       </AuthProvider>
     </TooltipProvider>
