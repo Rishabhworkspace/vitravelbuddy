@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Audiowide&family=Exo:wght@300;400;600;700&display=swap');
 @tailwind base;
 @tailwind components;
@@ -442,17 +443,40 @@ form {
   animation: hyperspaceJump 2s ease-in-out infinite;
 }
 
-/* Ensure select dropdowns work properly */
+/* ENHANCED DROPDOWN AND SELECT FIXES */
+/* Ensure select dropdowns work properly with proper z-index and positioning */
 [role="listbox"], [role="option"] {
   transform: translateZ(0) !important;
   position: relative !important;
-  z-index: 50 !important;
+  z-index: 9999 !important;
 }
 
-/* Fix for Radix UI components */
+/* Fix for Radix UI components - Ensure proper positioning and visibility */
 [data-radix-popper-content-wrapper] {
-  z-index: 50 !important;
+  z-index: 9999 !important;
   transform: translateZ(0) !important;
+}
+
+/* Radix Select Content positioning fixes */
+[data-radix-select-content] {
+  z-index: 9999 !important;
+  position: relative !important;
+  transform: translateZ(0) !important;
+  background: linear-gradient(135deg, rgba(31, 41, 55, 0.98) 0%, rgba(55, 65, 81, 0.98) 100%) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 2px solid rgba(217, 4, 41, 0.5) !important;
+  box-shadow: 0 0 30px rgba(217, 4, 41, 0.3), 0 20px 40px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Radix Dropdown Content positioning fixes */
+[data-radix-dropdown-menu-content] {
+  z-index: 9999 !important;
+  position: relative !important;
+  transform: translateZ(0) !important;
+  background: linear-gradient(135deg, rgba(31, 41, 55, 0.98) 0%, rgba(55, 65, 81, 0.98) 100%) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 2px solid rgba(217, 4, 41, 0.5) !important;
+  box-shadow: 0 0 30px rgba(217, 4, 41, 0.3), 0 20px 40px rgba(0, 0, 0, 0.8) !important;
 }
 
 /* Enhanced Toast Visibility */
