@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -14,6 +13,7 @@ import Dashboard from "./pages/Dashboard";
 import NotFound from "./pages/NotFound";
 import Starfield from "./components/Starfield";
 import Navigation from "./components/Navigation";
+import Spaceship3D from "./components/Spaceship3D";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +22,7 @@ const App = () => (
     <TooltipProvider>
       <AuthProvider>
         <Starfield />
+        <Spaceship3D />
         <Toaster />
         <Sonner />
         <BrowserRouter>
