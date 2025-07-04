@@ -4,6 +4,28 @@
 
 **URL**: https://vitravelbuddy.lovable.app
 
+## About VITravelBuddy
+
+VITravelBuddy is a community-based travel coordination platform designed exclusively for VIT students. Our goal is to simplify travel planning and reduce costs by helping students connect with others heading to the same destinations.
+
+Objectives
+Cost-effective Travel: Enable users to share cab rides or trips, reducing individual travel expenses.
+
+Companion Matching: Help students find fellow travelers for both long-distance and local journeys.
+
+Community Building: Foster connections within the VIT community through shared travel experiences.
+
+Convenience: Make travel planning easier, especially for popular routes like Chennai Airport or weekend getaways.
+
+Whether you're traveling for a holiday, heading home, or just exploring the city, VITravelBuddy makes the journey easier, cheaper, and more social.
+
+## Choosen Track :
+Full Stack 
+
+## For working and more details about the website check out our YouTube video :
+
+url : https://youtu.be/VhQSvqG3wJA?si=6ggeTWhA4zq6rV2B
+
 ## How can I edit this code?
 
 There are several ways of editing your application.
