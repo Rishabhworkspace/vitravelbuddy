@@ -107,12 +107,31 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const signOut = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) {
-      console.error('Sign out error:', error);
-      toast.error(error.message);
-    } else {
-      toast.success('May the Force be with you... always.');
+    try {
+      // Clear local state immediately to prevent UI confusion
+      setSession(null);
+      setUser(null);
+      
+      const { error } = await supabase.auth.signOut();
+      
+      if (error) {
+        // Check if it's a session not found error (which is expected after logout)
+        if (error.message?.includes('session_not_found') || error.message?.includes('Session not found')) {
+          // This is expected - session was already cleared
+          toast.success('May the Force be with you... always.');
+        } else {
+          console.error('Sign out error:', error);
+          toast.error('Logout failed. Please try again.');
+        }
+      } else {
+        toast.success('May the Force be with you... always.');
+      }
+    } catch (error) {
+      console.error('Unexpected logout error:', error);
+      // Still clear local state even if logout fails
+      setSession(null);
+      setUser(null);
+      toast.success('Logged out successfully.');
     }
   };
 
